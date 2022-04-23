@@ -1,0 +1,156 @@
+
+import javafx.application.Application;
+import javafx.geometry.Rectangle2D;
+import javafx.geometry.Side;
+import javafx.stage.Stage;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+import javafx.stage.Screen;
+
+public class Assignment3 extends Application
+{
+   public static void main(String[] args)
+   {
+        // Launch the application.
+        launch(args);
+   }
+   
+   @Override
+   public void start(Stage primaryStage)
+   {
+        // Constants for the scene dimensions
+        final double WIDTH = 1280.0, HEIGHT = 960.0;
+        
+
+        MenuButton studentCenterBtn = new MenuButton("Student Center");
+        studentCenterBtn.setPrefWidth(200);
+        studentCenterBtn.setPrefHeight(50);
+        studentCenterBtn.setPopupSide(Side.RIGHT);
+        //m.getItems().addAll(new MenuItem("Burger"), new MenuItem("Hot Dog"));
+
+        MenuButton myCommunicationsBtn = new MenuButton("My Communications");
+        myCommunicationsBtn.setPrefWidth(200);
+        myCommunicationsBtn.setPrefHeight(50);
+        myCommunicationsBtn.setPopupSide(Side.RIGHT);
+       //m2.getItems().addAll(new MenuItem("Juice"), new MenuItem("Milk"));
+
+        MenuButton personalInformationBtn = new MenuButton("Personal Information");
+        personalInformationBtn.setPrefWidth(200);
+        personalInformationBtn.setPrefHeight(50);
+        personalInformationBtn.setPopupSide(Side.RIGHT);
+        //m.getItems().addAll(new MenuItem("Burger"), new MenuItem("Hot Dog"));
+
+        MenuButton classAndRegistrationBtn = new MenuButton("Class & Registration");
+        classAndRegistrationBtn.setPrefWidth(200);
+        classAndRegistrationBtn.setPrefHeight(50);
+        classAndRegistrationBtn.setPopupSide(Side.RIGHT);
+
+        MenuButton financialBtn = new MenuButton("Financial");
+        financialBtn.setPrefWidth(200);
+        financialBtn.setPrefHeight(50);
+        financialBtn.setPopupSide(Side.RIGHT);
+        //m.getItems().addAll(new MenuItem("Burger"), new MenuItem("Hot Dog"));
+
+        MenuButton graduationBtn = new MenuButton("Graduation");
+        graduationBtn.setPrefWidth(200);
+        graduationBtn.setPrefHeight(50);
+        graduationBtn.setPopupSide(Side.RIGHT);
+
+        MenuButton academicsBtn = new MenuButton("Academics");
+        academicsBtn.setPrefWidth(200);
+        academicsBtn.setPrefHeight(50);
+        academicsBtn.setPopupSide(Side.RIGHT);
+        //m.getItems().addAll(new MenuItem("Burger"), new MenuItem("Hot Dog"));
+
+        MenuButton newStudentsBtn = new MenuButton("New Students");
+        newStudentsBtn.setPrefWidth(200);
+        newStudentsBtn.setPrefHeight(50);
+        newStudentsBtn.setPopupSide(Side.RIGHT);
+
+        MenuButton otherBtn = new MenuButton("Other");
+        otherBtn.setPrefWidth(200);
+        otherBtn.setPrefHeight(50);
+        otherBtn.setPopupSide(Side.RIGHT);
+        //m.getItems().addAll(new MenuItem("Burger"), new MenuItem("Hot Dog"));
+
+        final Menu menu1 = new Menu("BroncoDirect");
+        MenuBar menuBar = new MenuBar();
+        menuBar.setPrefHeight(20);
+        menuBar.getMenus().addAll(menu1);
+
+        MenuButton feedbackBtn = new MenuButton("Feedback");
+        feedbackBtn.setPrefWidth(200);
+        feedbackBtn.setPrefHeight(50);
+        feedbackBtn.setPopupSide(Side.RIGHT);
+
+        Label label = new Label("Add Classes : Select class to add : Fall Semester 2022");
+        label.setTextFill(Color.WHITE);
+
+        //***** NEED TO CHANGE BUTTON TO WHITE AND FONT TO BLUE IN STYLE SHEET *****
+        Button changeTermBtn = new Button("Change Term");
+        changeTermBtn.setPrefHeight(35);
+
+        BorderPane borderpane = new BorderPane();
+
+        //This holds all the buttons on the left and 
+        HBox hbox = new HBox();
+
+        //This holds both the menuBar and the gridpane 
+        VBox root = new VBox();
+
+        //This holds all the buttons on the left side of the screen
+        VBox vbox = new VBox();
+
+        
+        //This holds the black rectange right under Broncodirect Banner
+        HBox hbox1 = new HBox();
+        hbox1.setBackground(new Background(new BackgroundFill(Color.BLACK,null,null)));
+        hbox1.setPrefWidth(1030);
+        hbox1.setPrefHeight(35);
+        //Region is used to add the space between label and Change Term button
+        Region region1 = new Region();
+        HBox.setHgrow(region1,Priority.ALWAYS);
+        
+        //Used to add spacing between black banner and broncodirect banner
+        VBox vbox1 = new VBox();
+
+        vbox.getChildren().addAll(studentCenterBtn, myCommunicationsBtn,personalInformationBtn,classAndRegistrationBtn,
+                                  financialBtn,graduationBtn,academicsBtn,newStudentsBtn,otherBtn,feedbackBtn);
+        
+        hbox1.getChildren().addAll(label,region1,changeTermBtn);
+        
+        Region spacer = new Region();
+        spacer.setPrefHeight(10);
+        VBox.setVgrow(spacer, Priority.ALWAYS);
+        vbox1.getChildren().addAll(spacer,hbox1);
+
+
+        borderpane.setTop(vbox1);
+
+        hbox.getChildren().addAll(vbox,borderpane);
+        hbox.setSpacing(30);
+
+
+        root.getChildren().addAll(menuBar,hbox);
+
+        Scene scene = new Scene(root, WIDTH, HEIGHT);
+        //scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
+        primaryStage.setScene(scene);
+        primaryStage.show();
+   }
+}
