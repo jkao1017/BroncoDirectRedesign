@@ -1,7 +1,10 @@
 
 import javafx.application.Application;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.geometry.Side;
+import javafx.geometry.VPos;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -10,6 +13,8 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.Separator;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
@@ -36,7 +41,16 @@ public class Assignment3 extends Application
         // Constants for the scene dimensions
         final double WIDTH = 1280.0, HEIGHT = 960.0;
         
-
+        String cssLayout = "-fx-border-color: black;\n" +
+                            "-fx-border-insets: 10;\n" +
+                            "-fx-border-width: 1;\n" +
+                            "-fx-border-style: solid inside;\n";
+        String cssLayoutTransparent = "-fx-border-color: transparent;\n" +
+                            "-fx-border-insets: 10;\n" +
+                            "-fx-border-width: 1;\n" +
+                            "-fx-border-style: solid inside;\n";
+        //Create all the buttons on the left side of the screen
+        
         MenuButton studentCenterBtn = new MenuButton("Student Center");
         studentCenterBtn.setPrefWidth(200);
         studentCenterBtn.setPrefHeight(50);
@@ -99,6 +113,7 @@ public class Assignment3 extends Application
         feedbackBtn.setPopupSide(Side.RIGHT);
 
         Label label = new Label("Add Classes : Select class to add : Fall Semester 2022");
+        HBox.setMargin(label, new Insets(10,10,10,10));
         label.setTextFill(Color.WHITE);
 
         //***** NEED TO CHANGE BUTTON TO WHITE AND FONT TO BLUE IN STYLE SHEET *****
@@ -107,10 +122,10 @@ public class Assignment3 extends Application
 
         BorderPane borderpane = new BorderPane();
 
-        //This holds all the buttons on the left and 
+        //This holds all the buttons on the left and the gridpane
         HBox hbox = new HBox();
 
-        //This holds both the menuBar and the gridpane 
+        //This holds hbox
         VBox root = new VBox();
 
         //This holds all the buttons on the left side of the screen
@@ -138,9 +153,155 @@ public class Assignment3 extends Application
         spacer.setPrefHeight(10);
         VBox.setVgrow(spacer, Priority.ALWAYS);
         vbox1.getChildren().addAll(spacer,hbox1);
+        vbox1.setStyle(cssLayoutTransparent);
+        
+        //add to cart box
+        VBox addToCart = new VBox();
+        //addToCart.setSpacing(15);
+        addToCart.setStyle(cssLayout);
+        
+        HBox addToCartHelper = new HBox();
+        addToCartHelper.setAlignment(Pos.CENTER_LEFT);
+        addToCartHelper.setPrefHeight(35);
+        addToCartHelper.setBackground(new Background(new BackgroundFill(Color.LIGHTGREY,null,null)));
+        Label addToCartLabel = new Label("Add to Cart");
+        HBox.setMargin(addToCartLabel, new Insets(10,10,10,10));
+        addToCartHelper.getChildren().addAll(addToCartLabel);
+                
+        
+        //enter class number box
+        VBox enterClassNumber = new VBox();
+        enterClassNumber.setStyle(cssLayout);
+        
+        HBox enterClassNumberHelper = new HBox();
+        
+        enterClassNumberHelper.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY,null,null)));
+        enterClassNumberHelper.setPrefHeight(35);
 
+        
+        Label enterClassNumberLabel = new Label("Enter Class Number");
+        HBox.setMargin(enterClassNumberLabel, new Insets(10,10,10,10));
+        enterClassNumberHelper.getChildren().addAll(enterClassNumberLabel);
+        enterClassNumberHelper.setAlignment(Pos.CENTER_LEFT);
 
+        VBox enterButtonAndTextBoxHelper = new VBox();
+        
+        HBox enterButtonAndTextBox = new HBox();
+        enterButtonAndTextBox.setAlignment(Pos.CENTER);
+        enterButtonAndTextBox.setSpacing(5);
+        TextField textField = new TextField();
+        Button enterButton = new Button("Enter");
+        enterButton.getStyleClass().add("search-button");
+        enterButtonAndTextBox.getChildren().addAll(textField,enterButton);
+        
+        enterButtonAndTextBoxHelper.getChildren().addAll(enterButtonAndTextBox);
+        enterButtonAndTextBoxHelper.setAlignment(Pos.CENTER);
+        enterButtonAndTextBoxHelper.setPrefHeight(60);
+        enterButtonAndTextBoxHelper.setPrefWidth(250);
+
+        Separator separatorY = new Separator();
+        enterClassNumber.getChildren().addAll(enterClassNumberHelper,separatorY,enterButtonAndTextBoxHelper);
+        
+        //Find Classes box
+        VBox findClasses = new VBox();
+
+        findClasses.setStyle(cssLayout);
+        HBox findClassesHelper = new HBox();
+        findClassesHelper.setAlignment(Pos.CENTER_LEFT);
+        findClassesHelper.setPrefHeight(35);
+        findClassesHelper.setBackground(new Background(new BackgroundFill(Color.LIGHTGREY,null,null)));
+        Label findClassesLabel = new Label("Find Classes");
+        HBox.setMargin(findClassesLabel, new Insets(10,10,10,10));
+        findClassesHelper.getChildren().addAll(findClassesLabel);
+        
+        //Holds the buttons inside Find Classes Box
+        VBox searchButtons = new VBox();
+        searchButtons.setSpacing(10);
+        Button classSearch = new Button("Class Search");
+        Button myRequirements = new Button("My Requirements");
+        Button search = new Button("Search");
+        search.getStyleClass().add("search-button");
+        
+
+        
+        searchButtons.getChildren().addAll(classSearch,myRequirements,search,spacer);
+        searchButtons.setAlignment(Pos.CENTER_LEFT);
+        
+        HBox searchButtonsHelper = new HBox();
+        
+        
+        Region searchButtonsHelperSpacer = new Region();
+        searchButtonsHelperSpacer.setMaxWidth(28);
+        HBox.setHgrow(searchButtonsHelperSpacer, Priority.ALWAYS);
+        
+        searchButtonsHelper.getChildren().addAll(searchButtonsHelperSpacer,searchButtons);
+        
+        Region spacer5 = new Region();
+        spacer5.setPrefHeight(10);
+        VBox.setVgrow(spacer5, Priority.ALWAYS);
+        
+        findClasses.getChildren().addAll(findClassesHelper,new Separator(),spacer,searchButtonsHelper,spacer5);
+        
+        Region spacer6 = new Region();
+        spacer6.setMaxHeight(20);
+        VBox.setVgrow(spacer6, Priority.ALWAYS);
+        addToCart.getChildren().addAll(addToCartHelper,new Separator(),spacer6,enterClassNumber,findClasses);
+        
+        VBox shoppingCart = new VBox();
+        shoppingCart.setStyle(cssLayout);
+        HBox shoppingCartHelper = new HBox();
+        shoppingCartHelper.setAlignment(Pos.CENTER_LEFT);
+        shoppingCartHelper.setPrefHeight(35);
+        shoppingCartHelper.setBackground(new Background(new BackgroundFill(Color.LIGHTGREY,null,null)));
+        Label shoppingCartHelperLabel = new Label("Spring Semester 2022 Shopping Cart");
+        HBox.setMargin(shoppingCartHelperLabel, new Insets(10,10,10,10));
+        shoppingCartHelper.getChildren().addAll(shoppingCartHelperLabel);
+        
+        Separator separatorx = new Separator();
+        shoppingCart.getChildren().addAll(shoppingCartHelper,separatorx);
+        
+        Separator separator = new Separator();
+        Separator separator1 = new Separator();
+        Separator separator2 = new Separator();
+        Separator separator3 = new Separator();
+
+        
+        VBox inThisSectionFormat = new VBox();
+        inThisSectionFormat.setPrefWidth(300);
+        
+        VBox inThisSection = new VBox();
+        inThisSection.setPrefWidth(300);
+        inThisSection.setPrefHeight(200);
+        
+        inThisSection.setStyle(cssLayout);
+        HBox inThisSectionHelper = new HBox();
+        inThisSectionHelper.setAlignment(Pos.CENTER_LEFT);
+        inThisSectionHelper.setPrefHeight(35);
+        inThisSectionHelper.setBackground(new Background(new BackgroundFill(Color.LIGHTGREY,null,null)));
+        Label inThisSectionLabel = new Label("In this section");
+        HBox.setMargin(inThisSectionLabel, new Insets(10,10,10,10));
+        inThisSectionHelper.getChildren().add(inThisSectionLabel);
+        Label myClassSchedule = new Label("My Class Schedule");
+        VBox.setMargin(myClassSchedule, new Insets(10,10,10,10));
+        Label add = new Label("Add");
+        VBox.setMargin(add, new Insets(10,10,10,10));
+        Label drop = new Label("Drop");
+        VBox.setMargin(drop, new Insets(10,10,10,10));
+        Label swap = new Label("Swap");
+        VBox.setMargin(swap, new Insets(10,10,10,10));
+        Label termInformation = new Label("Term Information");
+        VBox.setMargin(termInformation, new Insets(10,10,10,10));
+        inThisSection.getChildren().addAll(inThisSectionHelper,separator,myClassSchedule,separator1,add,separator2,drop,separator3,termInformation);
+        
+        inThisSectionFormat.getChildren().add(inThisSection);
+        
+        
+        
         borderpane.setTop(vbox1);
+        borderpane.setLeft(addToCart);
+        borderpane.setRight(inThisSectionFormat);
+        borderpane.setCenter(shoppingCart);
+        
 
         hbox.getChildren().addAll(vbox,borderpane);
         hbox.setSpacing(30);
@@ -149,8 +310,12 @@ public class Assignment3 extends Application
         root.getChildren().addAll(menuBar,hbox);
 
         Scene scene = new Scene(root, WIDTH, HEIGHT);
+        scene.getStylesheets().add("style.css");
         //scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
         primaryStage.setScene(scene);
         primaryStage.show();
    }
 }
+
+
+
